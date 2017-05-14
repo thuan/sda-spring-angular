@@ -1,50 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
-  </head>
-  <body ng-app="myApp">
-    <div class="container" ng-controller="AppController">
-      <div class="page-header">
-        <h1>Projeto SDA</h1>
-      </div>
-      <div class="alert alert-info" role="alert" ng-hide="movies &amp;&amp; movies.length > 0">
-        Não há filmes cadastrados
-      </div>
-      <form class="form-horizontal" role="form" ng-submit="addMovie(name,author,description,favorite)">
-        <div class="form-group" ng-repeat="movie in movies">
-          <div class="checkbox col-xs-9">
-            <label>
-              <input type="checkbox" ng-model="movie.checked" ng-change="updateMovie(movie)"/> 
-              {{movie.name}} - {{movie.author}} - {{movie.description}} - {{movie.favorite}}
-            </label>
-          </div>
-          <div class="col-xs-3">
-            <button class="pull-right btn btn-danger" type="button" title="Delete"
-              ng-click="deleteMovie(movie)">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
-          </div>
-        </div>
-        <hr />
-        <div class="input-group">
-          <input type="text" class="form-control" ng-model="name" placeholder="Nome do Filme" />
-          <input type="text" class="form-control" ng-model="author" placeholder="Diretor do Filme" />
-          <input type="text" class="form-control" ng-model="description" placeholder="Sinopse" />
-          <input type="checkbox" ng-model="favorite">Filme Favorito ? </input>
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit" title="Add">
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-          </span>
-        </div>
-      </form>
-    </div>
-    <script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="./bower_components/lodash/dist/lodash.min.js"></script>
-    <script type="text/javascript" src="./app/app.js"></script>
-    <script type="text/javascript" src="./app/controllers.js"></script>
-    <script type="text/javascript" src="./app/services.js"></script>
-  </body>
+<head>
+<link rel="stylesheet"
+	href="./bower_components/bootstrap-css-only/css/bootstrap.min.css" />
+</head>
+<body ng-app="myApp">
+	<div class="container" ng-controller="AppController">
+		<div class="page-header">
+			<h1>Projeto SDA</h1>
+		</div>
+
+		
+
+
+		<form class="form-horizontal" role="form"
+			ng-submit="addMovie(name,author,description,favorite)">
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="name">Nome do Filme:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="name" class="form-control" id="name"
+						placeholder="Nome do Filme">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="author">Diretor:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="author" class="form-control" id="author"
+						placeholder="Diretor">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="author">Sinopse:</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="description" class="form-control" id="description"
+						placeholder="Sinopse">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model="favorite"> Favorito?</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</div>
+			
+			<hr />
+			
+			<div class="alert alert-info" role="alert"
+			ng-hide="movies &amp;&amp; movies.length > 0">Nao ha Filmes
+			cadastrados!</div>
+
+			<!-- Default panel contents -->
+			<div class="panel panel-default"
+				ng-hide="movies &amp;&amp; movies.length == 0">
+				<div class="panel-heading">
+					<span class="lead">List of Movies </span>
+				</div>
+				<div class="tablecontainer">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>ID.</th>
+								<th>Name</th>
+								<th>Author</th>
+								<th>Description</th>
+								<th>Favorite?</th>
+								<th width="20%"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="movie in movies">
+								<td><span ng-bind="movie.id"></span></td>
+								<td><span ng-bind="movie.name"></span></td>
+								<td><span ng-bind="movie.author"></span></td>
+								<td><span ng-bind="movie.description"></span></td>
+								<td><span>{{movie.favorite ? 'Sim' : 'Nao'}}</span></td>
+								<td>
+									<div class="col-xs-3">
+										<button class="pull-right btn btn-danger" type="button"
+											title="Delete" ng-click="deleteMovie(movie)">
+											<span class="glyphicon glyphicon-trash"></span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			
+			
+		</form>
+	</div>
+	<script type="text/javascript"
+		src="./bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript"
+		src="./bower_components/angular-resource/angular-resource.min.js"></script>
+	<script type="text/javascript"
+		src="./bower_components/lodash/dist/lodash.min.js"></script>
+	<script type="text/javascript" src="./app/app.js"></script>
+	<script type="text/javascript" src="./app/controllers.js"></script>
+	<script type="text/javascript" src="./app/services.js"></script>
+</body>
 </html>
