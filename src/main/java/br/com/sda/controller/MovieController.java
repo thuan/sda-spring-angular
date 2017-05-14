@@ -23,7 +23,12 @@ public class MovieController {
 	public List<Movie> findMovies() {
 		return repo.findAll();
 	}
-
+	
+	@RequestMapping(value = "/favs", method = RequestMethod.GET)
+	public List<Movie> findFavorites() {
+		return repo.findFavorites(Boolean.TRUE);
+	}
+	
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	public Movie findByName(@PathVariable String name) {
 		return repo.findByName(name);
